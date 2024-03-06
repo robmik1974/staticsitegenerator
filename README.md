@@ -1,1 +1,1 @@
-# staticsitegenerator
+#StaticSiteGenerator is my second project at BootDev
