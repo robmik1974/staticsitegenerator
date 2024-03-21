@@ -1,6 +1,6 @@
 """..."""
 import re
-from textnode import(
+from textnode import (
     TextNode,
     TEXT_TYPE_TEXT,
     TEXT_TYPE_BOLD,
@@ -91,3 +91,14 @@ def split_nodes_link(old_nodes):
         if node_text != "":
             new_nodes.append(TextNode(node_text, TEXT_TYPE_TEXT))
     return new_nodes
+
+
+def text_to_textnodes(text):
+    """Converts inline markdown into list of Text Nodes"""
+    result_nodes = [TextNode(text, TEXT_TYPE_TEXT)]
+    result_nodes = split_nodes_delimiter(result_nodes, "**", TEXT_TYPE_BOLD)
+    result_nodes = split_nodes_delimiter(result_nodes, "*", TEXT_TYPE_ITALIC)
+    result_nodes = split_nodes_delimiter(result_nodes, "`", TEXT_TYPE_CODE)
+    result_nodes = split_nodes_image(result_nodes)
+    result_nodes = split_nodes_link(result_nodes)
+    return result_nodes
